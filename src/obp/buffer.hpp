@@ -54,7 +54,7 @@ void obp_delete_vao (GLuint vao) {
 void obp_delete_buffer (GLuint buffer) {
 	
 	GLuint bufferId = buffer;
-	glDeleteBuffers(1, &vaoId);
+	glDeleteBuffers(1, &bufferId);
 }
 
 void obp_disable_vertex_attrib (GLint attrib) {
