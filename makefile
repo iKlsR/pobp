@@ -1,11 +1,11 @@
-EXEC = pobp.exe
+EXEC = pobp
 OBJS = src/obp.o
 
 CC = g++
 
 CFLAGS  = -W -Wall
 LIBS    = -lSOIL -lglew32 -lglfw -lopengl32
-LDFLAGS = -mwindows
+LDFLAGS = 
 
 $(EXEC): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
