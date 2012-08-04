@@ -45,4 +45,22 @@ GLuint obp_bind_vao (GLuint vao) {
 	return vaoId;
 }
 
+void obp_delete_vao (GLuint vao) {
+	
+	GLuint vaoId = vao;
+	glDeleteVertexArrays(1, &vaoId);
+}
+
+void obp_delete_buffer (GLuint buffer) {
+	
+	GLuint bufferId = buffer;
+	glDeleteBuffers(1, &vaoId);
+}
+
+void obp_disable_vertex_attrib (GLint attrib) {
+
+	GLint attribId = attrib;
+	glDisableVertexAttribArray(attribId);
+}
+
 #endif
