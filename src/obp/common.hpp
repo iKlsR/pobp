@@ -11,6 +11,7 @@
 #define OBP_NULL	 NULL
 
 #define TRI_FACE	 6
+float size = 1.0f;
 
 void obp_gl_info (void) {
 
