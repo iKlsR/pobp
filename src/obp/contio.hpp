@@ -83,6 +83,15 @@ void obp_fps () {
 
 		position -= right * deltaTime * speed;
 	}
+	
+	if (glfwGetKey(GLFW_KEY_LSHIFT) == GLFW_PRESS) {
+
+		speed = 10.0f;
+
+	} else {
+
+		speed = 3.0f;
+	}
 
 	float fov = initial_fov - 5 * glfwGetMouseWheel();
 
