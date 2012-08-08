@@ -141,6 +141,47 @@ GLuint obp_load_shaders_fm (const GLchar * vertex_shader, const GLchar * fragmen
     return programId;
 }
 
+GLuint obp_load_cmap (const char * xpos, const char * xneg, const char * ypos, const char * yneg, const char * zpos, const char * zneg, GLenum active_texture) {
+
+    GLuint textureId;
+    glGenTextures(1, &textureId);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
+    
+    glEnable(GL_TEXTURE_CUBE_MAP);
+    glActiveTexture(active_texture);
+    
+    int xpos_width, xpos_height, ypos_width, ypos_height, zpos_width, zpos_height;
+    int xneg_width, xneg_height, yneg_width, yneg_height, zneg_width, zneg_height;
+
+    unsigned char * xpos_image = SOIL_load_image(xpos, &xpos_width, &xpos_height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGB, xpos_width, xpos_height, 0, GL_RGB, GL_UNSIGNED_BYTE, xpos_image);
+    SOIL_free_image_data(xpos_image);
+    unsigned char * xneg_image = SOIL_load_image(xneg, &xneg_width, &xneg_height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGB, xneg_width, xneg_height, 0, GL_RGB, GL_UNSIGNED_BYTE, xneg_image);
+    SOIL_free_image_data(xneg_image);
+    unsigned char * ypos_image = SOIL_load_image(ypos, &ypos_width, &ypos_height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL_RGB, ypos_width, ypos_height, 0, GL_RGB, GL_UNSIGNED_BYTE, ypos_image);
+    SOIL_free_image_data(ypos_image);
+    unsigned char * yneg_image = SOIL_load_image(yneg, &yneg_width, &yneg_height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGB, yneg_width, yneg_height, 0, GL_RGB, GL_UNSIGNED_BYTE, yneg_image);
+    SOIL_free_image_data(yneg_image);
+    unsigned char * zpos_image = SOIL_load_image(zpos, &zpos_width, &zpos_height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGB, zpos_width, zpos_height, 0, GL_RGB, GL_UNSIGNED_BYTE, zpos_image);
+    SOIL_free_image_data(zpos_image);
+    unsigned char * zneg_image = SOIL_load_image(zneg, &zneg_width, &zneg_height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGB, zneg_width, zneg_height, 0, GL_RGB, GL_UNSIGNED_BYTE, zneg_image);
+    SOIL_free_image_data(zneg_image);
+    
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+   
+    return textureId;   
+}
+
 bool obp_load_obj (const char * path, std::vector<glm::vec3> & out_vertices, std::vector<glm::vec2> & out_uvs, std::vector<glm::vec3> & out_normals) {
     
     printf("INFO: Loading OBJ file %s.\n", path);
