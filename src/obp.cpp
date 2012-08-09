@@ -52,20 +52,19 @@ int main (int argc, char * argvs[]) {
 
 	}  
 
-
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
 	while (running) {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        {	// * calculate camera transformations here   
-    		
-        }   
+			{	// * calculate camera transformations here   
 
-        {	// * call draw methods here  
-          
-        }
+			}   
+
+			{	// * call draw methods here  
+
+			}
 
 		glfwSwapBuffers();
 	}
