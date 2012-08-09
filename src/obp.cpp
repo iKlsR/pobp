@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <stdio.h>
 
@@ -53,7 +52,7 @@ int main (int argc, char * argvs[]) {
 	}  
 
 
-    glClearColor(0.1f, 0.1, 0.1f, 1.0f);
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 	while (running) {
 
