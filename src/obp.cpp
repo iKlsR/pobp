@@ -41,19 +41,19 @@ int main (int argc, char * argvs[]) {
 	GLenum glewInitResult = glewInit();
 
 	glfwEnable(GLFW_STICKY_KEYS);
-    glfwEnable(GLFW_STICKY_MOUSE_BUTTONS);
+	glfwEnable(GLFW_STICKY_MOUSE_BUTTONS);
 
-    glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 
-    GLint posAttrib, colAttrib, uvAttrib, norAttrib;
-    GLuint programId;  
+	GLint posAttrib, colAttrib, uvAttrib, norAttrib;
+	GLuint programId;  
 
-    {	//create and allocate stuff here
- 
+	{	//create and allocate stuff here
+
 	}  
 
 
-    glClearColor(0.1f, 0.1, 0.1f, 1.0f);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 	while (running) {
 
