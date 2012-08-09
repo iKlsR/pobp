@@ -20,6 +20,21 @@ static const GLushort obp_triangle_elements[] = {
 	0, 1, 2
 };
 
+static const GLfloat obp_gplane_vertices[] = {
+
+	//XYZ					RGB					UV
+	-6.0f, 0.0f,  6.0f,		0.5, 0.5, 0.5,		0.0, 0.0,
+	-6.0f, 0.0f, -6.0f,		0.5, 0.5, 0.5,		1.0, 0.0,
+	 6.0f, 0.0f,  6.0f,		0.5, 0.5, 0.5,		0.0, 1.0,
+	 6.0f, 0.0f, -6.0f,		0.5, 0.5, 0.5,		1.0, 1.0
+};
+
+static const GLushort obp_gplane_elements[] = {
+
+	0, 1, 2,
+	2, 1, 3
+};
+
 static const GLfloat obp_rect_vertices[] = {
 
 	//XYZ					RGB					UV
