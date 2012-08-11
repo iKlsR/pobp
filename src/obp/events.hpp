@@ -15,6 +15,11 @@ GLFWCALL void obp_window_size_callback (int width, int height) {
     glfwGetWindowSize(&obp_window_width, &obp_window_height);   
 }
 
+GLFWCALL int obp_window_close_callback (void) {
+
+	running = false;
+}
+
 GLFWCALL void obp_event_key_callback (int key, int action) {
     
     if(GLFW_PRESS && glfwGetWindowParam(GLFW_OPENED)) {
@@ -43,6 +48,7 @@ void obp_callbacks (bool key, bool mouse) {
 		glfwSetMouseButtonCallback(obp_event_mouse_callback);
 
 	glfwSetWindowSizeCallback(obp_window_size_callback);
+	glfwSetWindowCloseCallback(obp_window_close_callback);
 }
 
 #endif
