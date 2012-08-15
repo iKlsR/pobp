@@ -19,10 +19,10 @@ GLuint obp_load_image (const char * file_path, GLenum active_texture) {
 
 	GLuint textureId;
 	glGenTextures(1, &textureId);
+
+    glActiveTexture(active_texture);
 	glBindTexture(GL_TEXTURE_2D, textureId);
-	
-	glActiveTexture(active_texture);
-	
+		
 	int width, height;
 	unsigned char * image = SOIL_load_image(file_path, &width, &height, 0, SOIL_LOAD_RGB);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
