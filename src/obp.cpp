@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <stdio.h>
 
@@ -58,13 +57,13 @@ int main (int argc, char * argvs[]) {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			{	// * calculate camera transformations here   
+		{	// * calculate camera transformations here   
 
-			}   
+		}   
 
-			{	// * call draw methods here  
+		{	// * call draw methods here  
 
-			}
+		}
 
 		glfwSwapBuffers();
 	}
