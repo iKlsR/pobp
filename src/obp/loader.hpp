@@ -2,8 +2,8 @@
 #define __LOADER_HPP__
 
 #include <fstream>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <string>
 #include <vector>
 
 #include <SOIL/SOIL.h>
