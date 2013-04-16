@@ -9,6 +9,6 @@ LDFLAGS =
 
 $(EXEC): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
-
+.PHONY clean:
 clean:
 	rm -f $(EXEC) $(OBJS) *~
