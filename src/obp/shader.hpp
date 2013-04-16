@@ -8,20 +8,20 @@
 const GLchar * vertex_shader = {
 
     "#version 400\n"\
-	
-	"void main() {\n"\
-	  
-	"}\n"
+    
+    "void main() {\n"\
+      
+    "}\n"
 
 };
 
 const GLchar * frag_shader = {
 
     "#version 400\n"
-	
-	"void main() {\n"\
-	  
-	"}\n"
+    
+    "void main() {\n"\
+      
+    "}\n"
 
 };
 

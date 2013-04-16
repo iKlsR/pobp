@@ -6,8 +6,8 @@
 extern bool running;
 
 int obp_window_width = 800,
-	obp_window_height  = 600,
-	obp_window_handle = 0;
+    obp_window_height  = 600,
+    obp_window_handle = 0;
 
 GLFWCALL void obp_window_size_callback (int width, int height) {
     
@@ -17,7 +17,7 @@ GLFWCALL void obp_window_size_callback (int width, int height) {
 
 GLFWCALL int obp_window_close_callback (void) {
 
-	running = false;
+    running = false;
 }
 
 GLFWCALL void obp_event_key_callback (int key, int action) {
@@ -41,14 +41,14 @@ GLFWCALL void obp_event_mouse_callback (int character, int action) {
 
 void obp_callbacks (bool key, bool mouse) {
 
-	if (key)
-		glfwSetKeyCallback(obp_event_key_callback);
+    if (key)
+        glfwSetKeyCallback(obp_event_key_callback);
 
-	if (mouse)
-		glfwSetMouseButtonCallback(obp_event_mouse_callback);
+    if (mouse)
+        glfwSetMouseButtonCallback(obp_event_mouse_callback);
 
-	glfwSetWindowSizeCallback(obp_window_size_callback);
-	glfwSetWindowCloseCallback(obp_window_close_callback);
+    glfwSetWindowSizeCallback(obp_window_size_callback);
+    glfwSetWindowCloseCallback(obp_window_close_callback);
 }
 
 #endif
