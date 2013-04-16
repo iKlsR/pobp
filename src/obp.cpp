@@ -22,56 +22,56 @@ bool running = true;
 
 int main (int argc, char * argvs[]) {
 
-	glfwInit();
+    glfwInit();
 
-	glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4);
-	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 4);
-	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 0);
-	glfwOpenWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+    glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4);
+    glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 4);
+    glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 0);
+    glfwOpenWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
-	obp_window_handle = glfwOpenWindow(obp_window_width, obp_window_height, 0, 0, 0, 0, 32, 0, GLFW_WINDOW);
-	glfwSetWindowTitle(obp_window_title);
+    obp_window_handle = glfwOpenWindow(obp_window_width, obp_window_height, 0, 0, 0, 0, 32, 0, GLFW_WINDOW);
+    glfwSetWindowTitle(obp_window_title);
 
-	obp_gl_info();
+    obp_gl_info();
 
-	obp_callbacks(true, true);
+    obp_callbacks(true, true);
 
-	GLenum glewInitResult = glewInit();
+    GLenum glewInitResult = glewInit();
 
-	glfwEnable(GLFW_STICKY_KEYS);
-	glfwEnable(GLFW_STICKY_MOUSE_BUTTONS);
+    glfwEnable(GLFW_STICKY_KEYS);
+    glfwEnable(GLFW_STICKY_MOUSE_BUTTONS);
 
-	glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
 
-	GLint posAttrib, colAttrib, uvAttrib, norAttrib;
-	GLuint programId;  
+    GLint posAttrib, colAttrib, uvAttrib, norAttrib;
+    GLuint programId;  
 
-	{	//create and allocate stuff here
+    {   //create and allocate stuff here
 
-	}  
+    }  
 
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-	while (running) {
+    while (running) {
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		{	// * calculate camera transformations here   
+        {   // * calculate camera transformations here   
 
-		}   
+        }   
 
-		{	// * call draw methods here  
+        {   // * call draw methods here  
 
-		}
+        }
 
-		glfwSwapBuffers();
-	}
+        glfwSwapBuffers();
+    }
 
-	{	//destroy resources here
+    {   //destroy resources here
 
-	}
+    }
 
-	glfwTerminate();
-	return OBP_SUCCESS;
+    glfwTerminate();
+    return OBP_SUCCESS;
 }

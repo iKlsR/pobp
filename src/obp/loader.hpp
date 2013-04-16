@@ -17,88 +17,88 @@ typedef string str;
 
 GLuint obp_load_image (const char * file_path, GLenum active_texture) {
 
-	GLuint textureId;
-	glGenTextures(1, &textureId);
+    GLuint textureId;
+    glGenTextures(1, &textureId);
 
     glActiveTexture(active_texture);
-	glBindTexture(GL_TEXTURE_2D, textureId);
-		
-	int width, height;
-	unsigned char * image = SOIL_load_image(file_path, &width, &height, 0, SOIL_LOAD_RGB);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-	SOIL_free_image_data(image);
-	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glGenerateMipmap(GL_TEXTURE_2D);
-		
-	return textureId;	
+    glBindTexture(GL_TEXTURE_2D, textureId);
+        
+    int width, height;
+    unsigned char * image = SOIL_load_image(file_path, &width, &height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    SOIL_free_image_data(image);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glGenerateMipmap(GL_TEXTURE_2D);
+        
+    return textureId;   
 }
 
 GLuint obp_load_shaders_ff (const char * vertex_file_path, const char * fragment_file_path) {
-	
-	GLuint vertexShaderId   = glCreateShader(GL_VERTEX_SHADER);
-	GLuint fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
-	GLuint programId        = glCreateProgram();
+    
+    GLuint vertexShaderId   = glCreateShader(GL_VERTEX_SHADER);
+    GLuint fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
+    GLuint programId        = glCreateProgram();
 
-	GLint result = GL_FALSE;
-	int infoLogLength;
-	str line = "";
-	
-	str vertexShaderCode = "";
-	ifstream vertexShaderStream(vertex_file_path, ios::in);
-	if(vertexShaderStream.is_open()) {
-		
-		while(getline(vertexShaderStream, line))
-			vertexShaderCode += line + "\n";
-		vertexShaderStream.close();
-	}
-	
-	str fragmentShaderCode = "";
-	ifstream fragmentShaderStream(fragment_file_path, ios::in);
-	if(fragmentShaderStream.is_open()) {
-		
-		while(getline(fragmentShaderStream, line))
-			fragmentShaderCode += line + "\n";
-		fragmentShaderStream.close();
-	}
+    GLint result = GL_FALSE;
+    int infoLogLength;
+    str line = "";
+    
+    str vertexShaderCode = "";
+    ifstream vertexShaderStream(vertex_file_path, ios::in);
+    if(vertexShaderStream.is_open()) {
+        
+        while(getline(vertexShaderStream, line))
+            vertexShaderCode += line + "\n";
+        vertexShaderStream.close();
+    }
+    
+    str fragmentShaderCode = "";
+    ifstream fragmentShaderStream(fragment_file_path, ios::in);
+    if(fragmentShaderStream.is_open()) {
+        
+        while(getline(fragmentShaderStream, line))
+            fragmentShaderCode += line + "\n";
+        fragmentShaderStream.close();
+    }
 
-	const char * vertexSourcePointer = vertexShaderCode.c_str();	
-	glShaderSource(vertexShaderId, 1, &vertexSourcePointer, NULL);
-	glCompileShader(vertexShaderId);
+    const char * vertexSourcePointer = vertexShaderCode.c_str();    
+    glShaderSource(vertexShaderId, 1, &vertexSourcePointer, NULL);
+    glCompileShader(vertexShaderId);
 
-	glGetShaderiv(vertexShaderId, GL_COMPILE_STATUS, &result);
-	glGetShaderiv(vertexShaderId, GL_INFO_LOG_LENGTH, &infoLogLength);
-	std::vector<char> vertexShaderErrorMessage(infoLogLength);
-	glGetShaderInfoLog(vertexShaderId, infoLogLength, NULL, &vertexShaderErrorMessage[0]);
-	fprintf(stdout, "%s\n", &vertexShaderErrorMessage[0]);
-	
-	const char * fragmentSourcePointer = fragmentShaderCode.c_str();	
-	glShaderSource(fragmentShaderId, 1, &fragmentSourcePointer, NULL);
-	glCompileShader(fragmentShaderId);
+    glGetShaderiv(vertexShaderId, GL_COMPILE_STATUS, &result);
+    glGetShaderiv(vertexShaderId, GL_INFO_LOG_LENGTH, &infoLogLength);
+    std::vector<char> vertexShaderErrorMessage(infoLogLength);
+    glGetShaderInfoLog(vertexShaderId, infoLogLength, NULL, &vertexShaderErrorMessage[0]);
+    fprintf(stdout, "%s\n", &vertexShaderErrorMessage[0]);
+    
+    const char * fragmentSourcePointer = fragmentShaderCode.c_str();    
+    glShaderSource(fragmentShaderId, 1, &fragmentSourcePointer, NULL);
+    glCompileShader(fragmentShaderId);
 
-	glGetShaderiv(fragmentShaderId, GL_COMPILE_STATUS, &result);
-	glGetShaderiv(fragmentShaderId, GL_INFO_LOG_LENGTH, &infoLogLength);
-	std::vector<char> fragmentShaderErrorMessage(infoLogLength);
-	glGetShaderInfoLog(fragmentShaderId, infoLogLength, NULL, &fragmentShaderErrorMessage[0]);
-	fprintf(stdout, "%s\n", &fragmentShaderErrorMessage[0]);
-	
-	glAttachShader(programId, vertexShaderId);
-	glAttachShader(programId, fragmentShaderId);
-	glLinkProgram(programId);
-	
-	glGetProgramiv(programId, GL_LINK_STATUS, &result);
-	glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &infoLogLength);
-	std::vector<char> programErrorMessage(max(infoLogLength, int(1)));
-	glGetProgramInfoLog(programId, infoLogLength, NULL, &programErrorMessage[0]);
-	fprintf(stdout, "%s\n", &programErrorMessage[0]);
+    glGetShaderiv(fragmentShaderId, GL_COMPILE_STATUS, &result);
+    glGetShaderiv(fragmentShaderId, GL_INFO_LOG_LENGTH, &infoLogLength);
+    std::vector<char> fragmentShaderErrorMessage(infoLogLength);
+    glGetShaderInfoLog(fragmentShaderId, infoLogLength, NULL, &fragmentShaderErrorMessage[0]);
+    fprintf(stdout, "%s\n", &fragmentShaderErrorMessage[0]);
+    
+    glAttachShader(programId, vertexShaderId);
+    glAttachShader(programId, fragmentShaderId);
+    glLinkProgram(programId);
+    
+    glGetProgramiv(programId, GL_LINK_STATUS, &result);
+    glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &infoLogLength);
+    std::vector<char> programErrorMessage(max(infoLogLength, int(1)));
+    glGetProgramInfoLog(programId, infoLogLength, NULL, &programErrorMessage[0]);
+    fprintf(stdout, "%s\n", &programErrorMessage[0]);
  
-	glDeleteShader(vertexShaderId);
-	glDeleteShader(fragmentShaderId);
+    glDeleteShader(vertexShaderId);
+    glDeleteShader(fragmentShaderId);
  
-	return programId;
+    return programId;
 }
 
 GLuint obp_load_shaders_fm (const GLchar * vertex_shader, const GLchar * fragment_shader) {
